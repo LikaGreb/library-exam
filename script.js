@@ -52,6 +52,39 @@ var books=[JSPart1, fullStuck, softwareArchitecture, artOfColor, clientWay, bloc
 
 var tbody = document.querySelector("tbody");
 
-for (let i = 0; i < books.length; i++){
-    tbody.innerHTML += "<tr><td>" + books[i].bookId + "</td><td>" + books[i].bookName + "</td><td>" + books[i].author + "</td><td>" + books[i].pageQuant + "</td><td>" + books[i].publisher + "</td><td>" + books[i].copyOfBook + "</td></tr>";
+function setTable(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        tbody.innerHTML += "<tr><td>" + arr[i].bookId + "</td><td>" + arr[i].bookName + "</td><td>" + arr[i].author + "</td><td>" + arr[i].pageQuant + "</td><td>" + arr[i].publisher + "</td><td>" + arr[i].copyOfBook + "</td><td><button class='editBtn' onclick='editButton(this)'>Edit</button></td><td><button class='deleteBtn' onclick='deleteButton(this)'>Delete</button></td></tr>";
+    }
+}
+setTable(books);
+
+var editBtn = document.getElementsByClassName("editBtn");
+
+function editButton(btn) {
+  
+  var tr = btn.parentNode.parentNode;
+  tr.style.backgroundColor = "yellow";
+    console.log(tr);
+
+    //потрібне модальне вікно
+    
+}
+
+function deleteButton(btn) {
+  
+    var tr = btn.parentNode.parentNode;
+    var bookIdTable = tr.cells[0].innerText;
+    console.log(bookIdTable);
+    let a = books.findIndex(item => item.bookId == bookIdTable);
+    books.splice(a, 1);
+    console.log(a);
+    tbody.innerHTML = "";
+    setTable(books);
+    
+}
+
+function addBook() {
+    
+    //модальне вікно
 }
