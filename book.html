@@ -33,6 +33,14 @@
     <input type="search" name="search" id="search" placeholder="Пошук по сайту">
     <button onclick="searchBook()">Search</button>
     <button onclick="backSearch()">Back</button>
+    
+    <label for="sortBy">Сортувати за:</label>
+    <select id="sortBy">
+        <option>Назва книги</option>
+        <option>Ім'я автора</option>
+        <option>Кількість екземплярів у бібліотеці</option>
+    </select>
+    <button onclick="sort()">Sort</button>
 
     <table id="table">
         <th></th>

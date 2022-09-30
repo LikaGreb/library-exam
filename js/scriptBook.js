@@ -26,7 +26,7 @@ JSPart1.setBook();
 var fullStuck = new Book(2, "Full Stack Recruiter: The Ultimate Edition", "Jan Tegze", 762, "Jan Tegze", 2010, 1);
 fullStuck.setBook();
 
-var softwareArchitecture = new Book(3, "Software Architecture in Practice (SEI Series in Software Engineering) 4th Edition", " Len Bass, Paul Clements, Rick Kazman", 442, "Addison-Wesley Professional", 2007, 3);
+var softwareArchitecture = new Book(3, "Software Architecture in Practice (SEI Series in Software Engineering) 4th Edition", "Len Bass, Paul Clements, Rick Kazman", 442, "Addison-Wesley Professional", 2007, 3);
 softwareArchitecture.setBook();
 
 var artOfColor = new Book(4, "Искусство цвета", "Иоханнес Иттен", 96, "Видавець Дмитро Аронов", 2003, 5);
@@ -93,12 +93,35 @@ function addBook() {
     //модальне вікно
 }
 
-//сортування за назвою. коли будуть заголовки таблиці, можна буде на них клікати
-let sortedRows = Array.from(table.rows)
-  .slice(1)
-  .sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
+//сортування
 
-table.tBodies[0].append(...sortedRows);
+function sort() {
+    var sortBy = document.getElementById("sortBy");
+    var sortedRows;
+    switch (sortBy.value) {
+        case "Назва книги": sortedRows = Array.from(table.rows)
+        .slice(1)
+        .sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
+            break;
+        
+        case "Ім'я автора": sortedRows = Array.from(table.rows)
+        .slice(1)
+        .sort((rowA, rowB) => rowA.cells[2].innerHTML > rowB.cells[2].innerHTML ? 1 : -1);
+            break;
+    
+        case "Кількість екземплярів у бібліотеці": sortedRows = Array.from(table.rows)
+        .slice(1)
+        .sort((rowA, rowB) => rowA.cells[6].innerHTML > rowB.cells[6].innerHTML ? 1 : -1);
+            break;
+        
+        default: sortedRows = Array.from(table.rows)
+        .slice(1)
+        .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
+            break;
+    }
+
+    table.tBodies[0].append(...sortedRows);
+}
 
 //пошук
  var search = document.getElementById("search");
