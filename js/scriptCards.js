@@ -59,7 +59,7 @@ var tbody = document.querySelector("tbody");
 function setTable(arr) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].returnDate == "") {
-            tbody.innerHTML += "<tr><td>" + arr[i].cardId + "</td><td>" + arr[i].visitorName + "</td><td>" + arr[i].bookName + "</td><td>" + arr[i].borrowDate + "</td><td><button onclick=returnBook()>Return</button></td></tr>";
+            tbody.innerHTML += "<tr><td>" + arr[i].cardId + "</td><td>" + arr[i].visitorName + "</td><td>" + arr[i].bookName + "</td><td>" + arr[i].borrowDate + "</td><td><button onclick=returnBook(this)>Return</button></td></tr>";
     
         }
         if (arr[i].returnDate !== "") {
@@ -326,6 +326,25 @@ function formatDate(date) {
 
     return [day, month, year].join('.');
 }
-function returnBook() {
+function returnBook(btn) {
+    var tr = btn.parentNode.parentNode;
+    var bookNameTable = tr.cells[2].innerText;
+    var cardIdTable = tr.cells[0].innerText;
     
+    for (let i = 0; i < books.length; i++){
+        if (books[i].bookName == bookNameTable) {
+            books[i].copyOfBook++;
+            console.log(books[i]);
+        }
+    }
+    editLocalStorageBooks();
+
+    for (let i = 0; i < cards.length; i++){
+        if (cards[i].cardId == cardIdTable) {
+            cards[i].returnDate=formatDate(new Date);
+            console.log(cards[i]);
+        }
+    }
+    editLocalStorage();
+    location.reload();
 }
