@@ -15,6 +15,7 @@
 
         <nav class="header__nav">
           <ul>
+            <li><a href="home.html">Home</a></li>
             <li><a href="book.html">Books</a></li>
             <li><a href="visitors.html">Visitors</a></li>
             <li><a href="cards.html">Cards</a></li>
@@ -26,16 +27,16 @@
     </header>
     <main>
       <div class="container">
-        <button onclick="addBook()">Add book</button>
+        <button onclick="addVisitor()">Add visitor</button>
     
-        <input type="search" name="search" id="search" placeholder="Пошук по сайту">
-        <button onclick="searchBook()">Search</button>
+        <input type="search" name="search" id="search" placeholder="Search">
+        <button onclick="searchVisitor()">Search</button>
         <button onclick="backSearch()">Back</button>
 
-        <label for="sortBy">Сортувати за:</label>
+        <label for="sortBy">Sort by:</label>
         <select id="sortBy">
-          <option>Ідентифікатор</option>
-          <option>Ім'я відвідувача</option>
+          <option>ID</option>
+          <option>Visitor's name</option>
         </select>
         <button onclick="sort()">Sort</button>
     

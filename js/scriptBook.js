@@ -51,8 +51,27 @@ var HTTP_2 = new Book(10, "HTTP/2 в действии", "Барри Поллар
 HTTP_2.setBook();
 
 //масив книг
-var books=[JSPart1, fullStuck, softwareArchitecture, artOfColor, clientWay, blockchain, things97, APIDesignPatterns, wordpress, HTTP_2];
+var booksStart=[JSPart1, fullStuck, softwareArchitecture, artOfColor, clientWay, blockchain, things97, APIDesignPatterns, wordpress, HTTP_2];
+var books;
+if (window.localStorage.getItem("books") == null) {
+    window.localStorage.setItem("books", JSON.stringify(booksStart));
+    books = JSON.parse(window.localStorage.getItem("books"));
+    console.log(books);
+}
+if (window.localStorage.getItem("books") !== null) {
+  
+    books = JSON.parse(window.localStorage.getItem("books"));
+    console.log(books);
+}
 
+ //запис змін у LocalStorage
+function editLocalStorage() {
+    window.localStorage.removeItem("books");
+    window.localStorage.setItem("books", JSON.stringify(books));
+    books = JSON.parse(window.localStorage.getItem("books"));
+    console.log(books);
+}
+editLocalStorage();
 var tbody = document.querySelector("tbody");
 
 //відображення таблиці книг
@@ -85,7 +104,8 @@ function deleteButton(btn) {
     
     tbody.innerHTML = "";
     setTable(books);
-    
+
+   editLocalStorage();
 }
 
 function addBook() {
@@ -99,19 +119,19 @@ function sort() {
     var sortBy = document.getElementById("sortBy");
     var sortedRows;
     switch (sortBy.value) {
-        case "Назва книги": sortedRows = Array.from(table.rows)
+        case "Book title": sortedRows = Array.from(table.rows)
         .slice(1)
         .sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
             break;
         
-        case "Ім'я автора": sortedRows = Array.from(table.rows)
+        case "Author's name": sortedRows = Array.from(table.rows)
         .slice(1)
         .sort((rowA, rowB) => rowA.cells[2].innerHTML > rowB.cells[2].innerHTML ? 1 : -1);
             break;
     
-        case "Кількість екземплярів у бібліотеці": sortedRows = Array.from(table.rows)
+        case "Copy of book": sortedRows = Array.from(table.rows)
         .slice(1)
-        .sort((rowA, rowB) => rowA.cells[6].innerHTML > rowB.cells[6].innerHTML ? 1 : -1);
+            .sort((rowA, rowB) => { return rowA.cells[6].innerHTML - rowB.cells[6].innerHTML; });
             break;
         
         default: sortedRows = Array.from(table.rows)
@@ -129,10 +149,10 @@ function sort() {
 function searchBook() {
     let counter = 0;
     if (search.value.length < 3) {
-        alert("Потрібно ввести більше трьох символів"); return;
+        alert("You must input more than 2 symbols"); return;
     }
     else if (search.value == "tbody") {
-        alert("Збігів не знайдено");
+        alert("No mathes");
         return;
     }
     for(let i=0; i<tbody.children.length; i++){
@@ -143,7 +163,7 @@ function searchBook() {
         
     }
     if (counter===0) {
-            alert("Збігів не знайдено"); 
+            alert("No mathes"); 
         }
 }
 

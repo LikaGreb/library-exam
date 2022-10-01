@@ -16,6 +16,7 @@
     
             <nav class="header__nav">
                 <ul>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="book.html">Books</a></li>
                     <li><a href="visitors.html">Visitors</a></li>
                     <li><a href="cards.html">Cards</a></li>
@@ -28,26 +29,26 @@
 
     <main>
         <div class="container">
-    <button onclick="addBook()">Add book</button>
-    
-    <input type="search" name="search" id="search" placeholder="Пошук по сайту">
-    <button onclick="searchBook()">Search</button>
-    <button onclick="backSearch()">Back</button>
-    
-    <label for="sortBy">Сортувати за:</label>
-    <select id="sortBy">
-        <option>Назва книги</option>
-        <option>Ім'я автора</option>
-        <option>Кількість екземплярів у бібліотеці</option>
-    </select>
-    <button onclick="sort()">Sort</button>
+            <button onclick="addBook()">Add book</button>
+            
+            <input type="search" name="search" id="search" placeholder="Search">
+            <button onclick="searchBook()">Search</button>
+            <button onclick="backSearch()">Back</button>
+            
+            <label for="sortBy">Sort by:</label>
+            <select id="sortBy">
+                <option>Book title</option>
+                <option>Author's name</option>
+                <option>Copy of book</option>
+            </select>
+            <button onclick="sort()">Sort</button>
 
-    <table id="table">
-        <th></th>
-        
-    </table>
+            <table id="table">
+                <th></th>
+                
+            </table>
 
-    </div>
+        </div>
     
     </main>
     <script src="/js/scriptBook.js"></script>

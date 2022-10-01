@@ -34,7 +34,28 @@ var rennie = new Visitor(10, "Cameron Rennie", '044-468-35-98');
 rennie.setVisitor();
 
 //масив відвідувачів
-var visitors = [kelley, lennon, gibbons, peel, medrano, tucker, mack, moses, feeney, rennie];
+var visitorsStart = [kelley, lennon, gibbons, peel, medrano, tucker, mack, moses, feeney, rennie];
+
+var visitors;
+if (window.localStorage.getItem("visitors") == null) {
+    window.localStorage.setItem("visitors", JSON.stringify(visitorsStart));
+    visitors = JSON.parse(window.localStorage.getItem("visitors"));
+    console.log(visitors);
+}
+if (window.localStorage.getItem("visitors") !== null) {
+  
+    visitors = JSON.parse(window.localStorage.getItem("visitors"));
+    console.log(visitors);
+}
+
+ //запис змін у LocalStorage
+function editLocalStorage() {
+    window.localStorage.removeItem("visitors");
+    window.localStorage.setItem("visitors", JSON.stringify(visitors));
+    visitors = JSON.parse(window.localStorage.getItem("visitors"));
+    console.log(visitors);
+}
+editLocalStorage();
 
 //відображення таблиці відвідувачів
 var tbody = document.querySelector("tbody");
@@ -59,7 +80,7 @@ function editButton(btn) {
 
 
 
-function addBook() {
+function addVisitor() {
     
     //модальне вікно
 }
@@ -70,20 +91,16 @@ function sort() {
     var sortBy = document.getElementById("sortBy");
     var sortedRows;
     switch (sortBy.value) {
-        case "Ідентифікатор": sortedRows = Array.from(table.rows)
+        case "ID": sortedRows = Array.from(table.rows)
         .slice(1)
-        .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
+            .sort((rowA, rowB) => { return rowA.cells[0].innerHTML - rowB.cells[0].innerHTML; });
             break;
         
-        case "Ім'я відвідувача": sortedRows = Array.from(table.rows)
+        case "Visitor's name": sortedRows = Array.from(table.rows)
         .slice(1)
         .sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
             break;
     
-        default: sortedRows = Array.from(table.rows)
-        .slice(1)
-        .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
-            break;
     }
 
     table.tBodies[0].append(...sortedRows);
@@ -92,13 +109,13 @@ function sort() {
 //пошук
  var search = document.getElementById("search");
 
-function searchBook() {
+function searchVisitor() {
     let counter = 0;
     if (search.value.length < 3) {
-        alert("Потрібно ввести більше трьох символів"); return;
+        alert("You must input more than 2 symbols"); return;
     }
     else if (search.value == "tbody") {
-        alert("Збігів не знайдено");
+        alert("No mathes");
         return;
     }
     for(let i=0; i<tbody.children.length; i++){
@@ -109,7 +126,7 @@ function searchBook() {
         
     }
     if (counter===0) {
-            alert("Збігів не знайдено"); 
+            alert("No mathes"); 
         }
 }
 

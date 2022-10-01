@@ -7,6 +7,7 @@
     <!--Получение стилевых файлов -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cardModalWindow.css">
 	</head>
 	<body>
     <header class="header">
@@ -15,6 +16,7 @@
 
         <nav class="header__nav">
           <ul>
+            <li><a href="home.html">Home</a></li>
             <li><a href="book.html">Books</a></li>
             <li><a href="visitors.html">Visitors</a></li>
             <li><a href="cards.html">Cards</a></li>
@@ -25,11 +27,49 @@
       </div>
     </header>
     <main>
-      
+        <div class="container">
+          <button onclick="addBook()">Add book</button>
+
+          <!--заготовка для модального вікна--> 
+          <button id="show-modal" class="btn">New Card</button>
+          
+          
+          <input type="search" name="search" id="search" placeholder="Search">
+          <button onclick="searchCard()">Search</button>
+          <button onclick="backSearch()">Back</button>
+        
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option>ID</option>
+            <option>Visitor</option>
+            <option>Book</option>
+            <option>Borrow Date</option>
+            <option>Return Date</option>
+          </select>
+          <button onclick="sort()">Sort</button>
+        
+          <table id="table">
+            <th></th>
+        
+          </table>
+        
+        </div>
       
     </main>
     
     
-		<script src="js/script.js"></script>
+		<script src="js/scriptCards.js"></script>
+    <!-- сікрипт для модального вікна-->
+    <script>
+      (function () {
+          // создаём модальное окно
+          var modal = $modal();
+          // при клике по кнопке #show-modal
+          document.querySelector('#show-modal').addEventListener('click', function () {
+            // отобразим модальное окно
+            modal.show();
+          });
+        })();
+    </script>
 	</body>
 </html>
