@@ -46,6 +46,16 @@
         </table>
     
       </div>
+
+        <!--modal window-->
+        <form onsubmit="return false"  id="editForm">
+          <label for="editVisitorName">Visitor</label>
+          <input type="text" id="editVisitorName" name="editVisitorName" value="" required>
+          <label for="editPhone">Phone</label>
+          <input type="text" id="editPhone" name="editPhone" value="" required>
+          <button onclick="saveEdit()">Save</button>
+        </form>
+       
     
     </main>
     

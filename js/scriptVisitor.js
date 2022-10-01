@@ -32,20 +32,30 @@ var feeney = new Visitor(9, "Kara Feeney", '044-765-13-45');
 feeney.setVisitor();
 var rennie = new Visitor(10, "Cameron Rennie", '044-468-35-98');
 rennie.setVisitor();
+var newVisitor;
 
 //масив відвідувачів
 var visitorsStart = [kelley, lennon, gibbons, peel, medrano, tucker, mack, moses, feeney, rennie];
-
+var visitorIdCounter;
 var visitors;
+
 if (window.localStorage.getItem("visitors") == null) {
     window.localStorage.setItem("visitors", JSON.stringify(visitorsStart));
     visitors = JSON.parse(window.localStorage.getItem("visitors"));
     console.log(visitors);
 }
 if (window.localStorage.getItem("visitors") !== null) {
-  
     visitors = JSON.parse(window.localStorage.getItem("visitors"));
     console.log(visitors);
+}
+if (window.localStorage.getItem("visitorIdCounter") == null) {
+    window.localStorage.setItem("visitorIdCounter", 11);
+    visitorIdCounter=window.localStorage.getItem("visitorIdCounter")
+    console.log(visitorIdCounter);
+}
+if (window.localStorage.getItem("visitorIdCounter") !== null) {
+    visitorIdCounter=window.localStorage.getItem("visitorIdCounter")
+    console.log(visitorIdCounter);
 }
 
  //запис змін у LocalStorage
@@ -60,28 +70,79 @@ editLocalStorage();
 //відображення таблиці відвідувачів
 var tbody = document.querySelector("tbody");
 function setTable(arr) {
+    tbody.innerHTML = "";
     for (let i = 0; i < arr.length; i++) {
         tbody.innerHTML += "<tr><td>" + arr[i].visitorId + "</td><td>" + arr[i].visitorName + "</td><td>" + arr[i].phoneNumber + "</td><td><button class='editBtn' onclick='editButton(this)'>Edit</button></td></tr>";
     }
 }
 setTable(visitors);
 
-var editBtn = document.getElementsByClassName("editBtn");
-
+    var editBtn = document.getElementsByClassName("editBtn");
+    var editVisitorName = document.getElementById("editVisitorName");
+    var editPhone = document.getElementById("editPhone");
+  
+    var visitorIdTable;
+    var editVisitorTable;
+    var editPhoneTable;
+        
 function editButton(btn) {
   
-  var tr = btn.parentNode.parentNode;
-  tr.style.backgroundColor = "yellow";
-    console.log(tr);
-
-    //потрібне модальне вікно
+    var tr = btn.parentNode.parentNode;
+    tr.style.backgroundColor = "yellow";
+    visitorIdTable = tr.cells[0].innerText;
+    editVisitorTable = tr.cells[1].innerText;
+    editPhoneTable = tr.cells[2].innerText;
     
+    editVisitorName.value = editVisitorTable;
+    editPhone.value = editPhoneTable;
+    
+    //потрібне css для модального вікна
+    
+    
+}
+
+function saveEdit() {
+    let template = /^[\d\s-]*$/;;
+    if ((editVisitorName.value.length > 1) && (template.test(editPhone.value)) && (editPhone.value.length > 0)) {
+        for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i].visitorId == visitorIdTable) {
+                visitors[i].visitorName = editVisitorName.value;
+                visitors[i].phoneNumber = editPhone.value;
+            
+            }
+        }
+        editLocalStorage();
+        location.reload();
+    }
+    else alert("All fields must be filled and phone must contains only numbers, spase and '-'")
 }
 
 
 
 function addVisitor() {
-    
+    let template = /^[\d\s-]*$/;
+        
+    if ((editVisitorName.value.length > 1) && (template.test(editPhone.value)) && (editPhone.value.length > 0)) {
+        for (let i = 0; i < visitors.length; i++) {
+            if (visitors[i].visitorId < visitorIdCounter) {
+                console.log(visitorIdCounter, editVisitorName.value, editPhone.value);
+                newVisitor = new Visitor(visitorIdCounter, editVisitorName.value, editPhone.value); 
+                newVisitor.setVisitor();
+                visitors.push(newVisitor);
+                
+                editLocalStorage();
+                location.reload();
+                return  window.localStorage.setItem("visitorIdCounter", (Number(visitorIdCounter) + 1));
+                
+            }
+       
+        }
+       
+                
+                
+                
+            }
+    else alert("All fields must be filled and phone must contains only numbers, spase and '-'")
     //модальне вікно
 }
 

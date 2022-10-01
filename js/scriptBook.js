@@ -4,8 +4,8 @@ class Book{
         this.bookName = bookName,
         this.author = author,
         this.pageQuant = pageQuant,
-            this.publisher = publisher,
-            this.publishYear=publishYear,
+        this.publisher = publisher,
+        this.publishYear=publishYear,
         this.copyOfBook = copyOfBook
     }
     setBook() {
@@ -82,22 +82,72 @@ function setTable(arr) {
 }
 setTable(books);
 
-var editBtn = document.getElementsByClassName("editBtn");
-
+    var editBtn = document.getElementsByClassName("editBtn");
+    var editBookName = document.getElementById("editBookName");
+    var editAuthor = document.getElementById("editAuthor");
+    var editPageQuant = document.getElementById("editPageQuant");
+    var editPublisher = document.getElementById("editPublisher");
+    var editPublishYear = document.getElementById("editPublishYear");
+    var editCopy = document.getElementById("editCopy");
+    var bookIdTable;
+    var bookNameTable;
+    var authorTable;
+    var pageQuantTAble;
+    var publisherTable;
+    var publishYearTable;
+    var copyOfBookTable;
+    
 function editButton(btn) {
   
-  var tr = btn.parentNode.parentNode;
-  tr.style.backgroundColor = "yellow";
-    console.log(tr);
+    var tr = btn.parentNode.parentNode;
+    tr.style.backgroundColor = "yellow";
+    bookIdTable = tr.cells[0].innerText;
+    bookNameTable = tr.cells[1].innerText;
+    authorTable = tr.cells[2].innerText;
+    pageQuantTAble = tr.cells[3].innerText;
+    publisherTable = tr.cells[4].innerText;
+    publishYearTable = tr.cells[5].innerText;
+    copyOfBookTable = tr.cells[6].innerText;
 
-    //потрібне модальне вікно
+    editBookName.value = bookNameTable;
+    editAuthor.value = authorTable;
+    editPageQuant.value = pageQuantTAble;
+    editPublisher.value = publisherTable;
+    editPublishYear.value = publishYearTable;
+    editCopy.value = copyOfBookTable;
+
+    //потрібне css для модального вікна
+    
     
 }
+function saveEdit() {
+
+    if ((editBookName.value.length > 1) && (editAuthor.value.length > 1) && (editPageQuant.value > 0) && (editPublisher.value.length > 1) && (editPublishYear.value > 0) && (editCopy.value > 0)) {
+       
+        for (let i = 0; i < books.length; i++) {
+            if (books[i].bookId == bookIdTable) {
+                books[i].author = editAuthor.value;
+                books[i].pageQuant = editPageQuant.value;
+                books[i].publisher = editPublisher.value;
+                books[i].publishYear = editPublishYear.value;
+                books[i].copyOfBook = editCopy.value;
+            }
+        }
+        editLocalStorage();
+        location.reload();
+    }
+    else {
+        alert("All fields must be filled and numbers must be positive");
+        
+    }
+}
+
+
 
 function deleteButton(btn) {
   
     var tr = btn.parentNode.parentNode;
-    var bookIdTable = tr.cells[0].innerText;
+    bookIdTable = tr.cells[0].innerText;
     
     let a = books.findIndex(item => item.bookId == bookIdTable);
     books.splice(a, 1);

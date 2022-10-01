@@ -310,8 +310,8 @@ function makeCounter() {
         return function() {
             return cardIdCounter++;
         };
-    }
-
+}
+    
 
 function formatDate(date) {
     var d = new Date(date),
