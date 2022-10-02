@@ -50,9 +50,12 @@ wordpress.setBook();
 var HTTP_2 = new Book(10, "HTTP/2 в действии", "Барри Поллард", 424, "ДМК Пресс", 2015, 4);
 HTTP_2.setBook();
 
+var newBook;
+
 //масив книг
 var booksStart=[JSPart1, fullStuck, softwareArchitecture, artOfColor, clientWay, blockchain, things97, APIDesignPatterns, wordpress, HTTP_2];
 var books;
+var bookIdCounter;
 if (window.localStorage.getItem("books") == null) {
     window.localStorage.setItem("books", JSON.stringify(booksStart));
     books = JSON.parse(window.localStorage.getItem("books"));
@@ -62,6 +65,15 @@ if (window.localStorage.getItem("books") !== null) {
   
     books = JSON.parse(window.localStorage.getItem("books"));
     console.log(books);
+}
+if (window.localStorage.getItem("bookIdCounter") == null) {
+    window.localStorage.setItem("bookIdCounter", 11);
+    bookIdCounter=window.localStorage.getItem("bookIdCounter")
+    console.log(bookIdCounter);
+}
+if (window.localStorage.getItem("bookIdCounter") !== null) {
+    bookIdCounter=window.localStorage.getItem("bookIdCounter")
+    console.log(bookIdCounter);
 }
 
  //запис змін у LocalStorage
@@ -160,6 +172,23 @@ function deleteButton(btn) {
 
 function addBook() {
     
+        
+    if ((editBookName.value.length > 1) && (editAuthor.value.length > 1) && (editPageQuant.value > 0) && (editPublisher.value.length > 1) && (editPublishYear.value > 0) && (editCopy.value > 0)) {
+         for (let i = 0; i < books.length; i++) {
+            if (books[i].bookId < bookIdCounter) {
+                
+                newBook = new Book(bookIdCounter, editBookName.value, editAuthor.value, editPageQuant.value, editPublisher.value, editPublishYear.value, editCopy.value); 
+                newBook.setBook();
+                books.push(newBook);
+                
+                editLocalStorage();
+                location.reload();
+                return  window.localStorage.setItem("bookIdCounter", (Number(bookIdCounter) + 1));
+         
+            }
+        }
+    }
+    else alert("All fields must be filled and numbers must be positive")
     //модальне вікно
 }
 

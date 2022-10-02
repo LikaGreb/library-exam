@@ -133,15 +133,10 @@ function addVisitor() {
                 editLocalStorage();
                 location.reload();
                 return  window.localStorage.setItem("visitorIdCounter", (Number(visitorIdCounter) + 1));
-                
+         
             }
-       
         }
-       
-                
-                
-                
-            }
+    }
     else alert("All fields must be filled and phone must contains only numbers, spase and '-'")
     //модальне вікно
 }

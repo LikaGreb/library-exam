@@ -28,16 +28,16 @@
     </header>
     <main>
         <div class="container">
-          <button onclick="addBook()">Add book</button>
-
-          <!--заготовка для модального вікна--> 
+          
+<!--заготовка для модального вікна--> 
           <button id="show-modal" class="btn">New Card</button>
           
-          
+<!-- пошук по списку-->
           <input type="search" name="search" id="search" placeholder="Search">
           <button onclick="searchCard()">Search</button>
           <button onclick="backSearch()">Back</button>
         
+<!-- сортвання-->
           <label for="sortBy">Sort by:</label>
           <select id="sortBy">
             <option>ID</option>
@@ -47,7 +47,8 @@
             <option>Return Date</option>
           </select>
           <button onclick="sort()">Sort</button>
-        
+          
+<!-- список карток-->
           <table id="table">
             <th></th>
         
