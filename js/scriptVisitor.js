@@ -85,8 +85,36 @@ setTable(visitors);
     var editVisitorTable;
     var editPhoneTable;
         
+ //МОДАЛЬНЕ ВІКНО
+// Отримуеш модальне вікно
+var modal = document.getElementById('myModal');
+
+// Отримуеш кнопку, яка відкриває модальне вікно
+var btn = document.getElementById("myBtn");
+
+// Отримуеш елемент <span>, який закриває модальне вікно
+var span = document.getElementsByClassName("close")[0];
+
+// Коли користувач натискає кнопку, відкривається модальне вікно
+ function openModal() {
+    modal.style.display = "block";
+}
+
+// Коли користувач клацає на <span> (x), закривається модальне вікно
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Коли користувач клацає будь-де за межами модального вікна, воно закривається
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+//МОДАЛЬНЕ ВІКНО
+
 function editButton(btn) {
-  
+   modal.style.display = "block";
     var tr = btn.parentNode.parentNode;
     tr.style.backgroundColor = "yellow";
     visitorIdTable = tr.cells[0].innerText;
@@ -95,10 +123,7 @@ function editButton(btn) {
     
     editVisitorName.value = editVisitorTable;
     editPhone.value = editPhoneTable;
-    
-    //потрібне css для модального вікна
-    
-    
+
 }
 
 function saveEdit() {
@@ -120,6 +145,7 @@ function saveEdit() {
 
 
 function addVisitor() {
+    modal.style.display = "block";
     let template = /^[\d\s-]*$/;
         
     if ((editVisitorName.value.length > 1) && (template.test(editPhone.value)) && (editPhone.value.length > 0)) {
@@ -138,7 +164,7 @@ function addVisitor() {
         }
     }
     else alert("All fields must be filled and phone must contains only numbers, spase and '-'")
-    //модальне вікно
+    
 }
 
 //сортування

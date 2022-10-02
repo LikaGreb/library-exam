@@ -108,9 +108,37 @@ setTable(books);
     var publisherTable;
     var publishYearTable;
     var copyOfBookTable;
+
+    //МОДАЛЬНЕ ВІКНО
+// Отримуеш модальне вікно
+var modal = document.getElementById('myModal');
+
+// Отримуеш кнопку, яка відкриває модальне вікно
+var btn = document.getElementById("myBtn");
+
+// Отримуеш елемент <span>, який закриває модальне вікно
+var span = document.getElementsByClassName("close")[0];
+
+// Коли користувач натискає кнопку, відкривається модальне вікно
+ function openModal() {
+    modal.style.display = "block";
+}
+
+// Коли користувач клацає на <span> (x), закривається модальне вікно
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Коли користувач клацає будь-де за межами модального вікна, воно закривається
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+//МОДАЛЬНЕ ВІКНО
     
 function editButton(btn) {
-  
+  modal.style.display = "block";
     var tr = btn.parentNode.parentNode;
     tr.style.backgroundColor = "yellow";
     bookIdTable = tr.cells[0].innerText;
@@ -127,10 +155,7 @@ function editButton(btn) {
     editPublisher.value = publisherTable;
     editPublishYear.value = publishYearTable;
     editCopy.value = copyOfBookTable;
-
-    //потрібне css для модального вікна
-    
-    
+ 
 }
 function saveEdit() {
 
@@ -172,7 +197,7 @@ function deleteButton(btn) {
 
 function addBook() {
     
-        
+        modal.style.display = "block";
     if ((editBookName.value.length > 1) && (editAuthor.value.length > 1) && (editPageQuant.value > 0) && (editPublisher.value.length > 1) && (editPublishYear.value > 0) && (editCopy.value > 0)) {
          for (let i = 0; i < books.length; i++) {
             if (books[i].bookId < bookIdCounter) {
@@ -189,7 +214,7 @@ function addBook() {
         }
     }
     else alert("All fields must be filled and numbers must be positive")
-    //модальне вікно
+    
 }
 
 //сортування

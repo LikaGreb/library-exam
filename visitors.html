@@ -27,7 +27,7 @@
     </header>
     <main>
       <div class="container">
-        <button onclick="addVisitor()">Add visitor</button>
+        <button onclick="openModal()">Add visitor</button>
     
         <input type="search" name="search" id="search" placeholder="Search">
         <button onclick="searchVisitor()">Search</button>
@@ -48,15 +48,27 @@
       </div>
 
         <!--modal window-->
-        <form onsubmit="return false"  id="editForm">
-          <label for="editVisitorName">Visitor</label>
-          <input type="text" id="editVisitorName" name="editVisitorName" value="" required>
-          <label for="editPhone">Phone</label>
-          <input type="text" id="editPhone" name="editPhone" value="" required>
-          <button onclick="saveEdit()">Save</button>
-        </form>
-       
-    
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div>
+              <span class="close">&times;</span>
+            </div>
+            <div>
+              <div>
+                <label for="editVisitorName">Visitor</label>
+                <input type="text" class="modalInput" id="editVisitorName" name="editVisitorName" value="" required>
+              </div>
+              <div>
+                <label for="editPhone">Phone</label>
+                <input type="text" class="modalInput" id="editPhone" name="editPhone" value="" required>
+              </div>
+              <div>
+                <button id="saveBtn" onclick="addVisitor()">Save visitor</button>
+                <button onclick="saveEdit()">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
     
     
