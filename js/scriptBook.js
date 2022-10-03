@@ -59,21 +59,21 @@ var bookIdCounter;
 if (window.localStorage.getItem("books") == null) {
     window.localStorage.setItem("books", JSON.stringify(booksStart));
     books = JSON.parse(window.localStorage.getItem("books"));
-    console.log(books);
+    
 }
 if (window.localStorage.getItem("books") !== null) {
   
     books = JSON.parse(window.localStorage.getItem("books"));
-    console.log(books);
+    
 }
 if (window.localStorage.getItem("bookIdCounter") == null) {
     window.localStorage.setItem("bookIdCounter", 11);
     bookIdCounter=window.localStorage.getItem("bookIdCounter")
-    console.log(bookIdCounter);
+    
 }
 if (window.localStorage.getItem("bookIdCounter") !== null) {
     bookIdCounter=window.localStorage.getItem("bookIdCounter")
-    console.log(bookIdCounter);
+    
 }
 
  //запис змін у LocalStorage
@@ -81,7 +81,7 @@ function editLocalStorage() {
     window.localStorage.removeItem("books");
     window.localStorage.setItem("books", JSON.stringify(books));
     books = JSON.parse(window.localStorage.getItem("books"));
-    console.log(books);
+    
 }
 editLocalStorage();
 var tbody = document.querySelector("tbody");

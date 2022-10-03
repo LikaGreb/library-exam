@@ -1,4 +1,4 @@
-.modal__backdrop {
+.modal1__backdrop {
     position: fixed;
     top: 0;
     right: 0;
@@ -11,7 +11,7 @@
     transition: opacity0 .2s ease-in;
 }
 
-.modal__content {
+.modal1__content {
     position: relative;
     width: auto;
     margin: 10px;
@@ -26,21 +26,21 @@
 }
 
 @media (min-width: 576px) {
-    .modal__content {
+    .modal1__content {
         max-width: 500px;
         margin: 50px auto;
     }
 }
 
-.modal__show .modal__backdrop,
-.modal__show .modal__content {
+.modal1__show .modal1__backdrop,
+.modal1__show .modal1__content {
     opacity: 1;
     z-index: 1050;
     pointer-events: auto;
     overflow-y: auto;
 }
 
-.modal__header {
+.modal1__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,7 +48,7 @@
     border-bottom: 1px solid #eceeef;
 }
 
-.modal__title {
+.modal1__title {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 1.5;
@@ -56,7 +56,7 @@
     font-weight: 500;
 }
 
-.modal__btn-close {
+.modal1__btn-close {
     float: right;
     font-family: sans-serif;
     font-size: 24px;
@@ -68,22 +68,22 @@
     text-decoration: none;
 }
 
-.modal__btn-close:focus,
-.modal__btn-close:hover {
+.modal1__btn-close:focus,
+.modal1__btn-close:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
     opacity: 0.75;
 }
 
-.modal__body {
+.modal1__body {
     position: relative;
     flex: 1 1 auto;
     padding: 15px;
     overflow: auto;
 }
 
-.modal__footer {
+.modal1__footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;

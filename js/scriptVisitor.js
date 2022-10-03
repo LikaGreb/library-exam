@@ -42,20 +42,20 @@ var visitors;
 if (window.localStorage.getItem("visitors") == null) {
     window.localStorage.setItem("visitors", JSON.stringify(visitorsStart));
     visitors = JSON.parse(window.localStorage.getItem("visitors"));
-    console.log(visitors);
+    
 }
 if (window.localStorage.getItem("visitors") !== null) {
     visitors = JSON.parse(window.localStorage.getItem("visitors"));
-    console.log(visitors);
+    
 }
 if (window.localStorage.getItem("visitorIdCounter") == null) {
     window.localStorage.setItem("visitorIdCounter", 11);
     visitorIdCounter=window.localStorage.getItem("visitorIdCounter")
-    console.log(visitorIdCounter);
+    
 }
 if (window.localStorage.getItem("visitorIdCounter") !== null) {
     visitorIdCounter=window.localStorage.getItem("visitorIdCounter")
-    console.log(visitorIdCounter);
+    
 }
 
  //запис змін у LocalStorage
@@ -63,7 +63,7 @@ function editLocalStorage() {
     window.localStorage.removeItem("visitors");
     window.localStorage.setItem("visitors", JSON.stringify(visitors));
     visitors = JSON.parse(window.localStorage.getItem("visitors"));
-    console.log(visitors);
+   
 }
 editLocalStorage();
 
@@ -151,7 +151,6 @@ function addVisitor() {
     if ((editVisitorName.value.length > 1) && (template.test(editPhone.value)) && (editPhone.value.length > 0)) {
         for (let i = 0; i < visitors.length; i++) {
             if (visitors[i].visitorId < visitorIdCounter) {
-                console.log(visitorIdCounter, editVisitorName.value, editPhone.value);
                 newVisitor = new Visitor(visitorIdCounter, editVisitorName.value, editPhone.value); 
                 newVisitor.setVisitor();
                 visitors.push(newVisitor);

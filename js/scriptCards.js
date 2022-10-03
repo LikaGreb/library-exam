@@ -3,8 +3,6 @@ class Card{
     
 }
 var visitors = JSON.parse(window.localStorage.getItem("visitors"));
-
-
 var books = JSON.parse(window.localStorage.getItem("books"));
 
         
@@ -22,27 +20,35 @@ card2.bookName = books[1].bookName;
 card2.borrowDate = formatDate('08 22 2022');
 card2.returnDate = formatDate('09 22 2022');
 
-var cardIdCounter = 3;
-
 //масив карток
 var cardsStart = [card1, card2];
 var cards;
+var cardIdCounter;
 if (window.localStorage.getItem("cards") == null) {
     window.localStorage.setItem("cards", JSON.stringify(cardsStart));
     cards = JSON.parse(window.localStorage.getItem("cards"));
-    console.log(cards);
+    
 }
 if (window.localStorage.getItem("cards") !== null) {
   
     cards = JSON.parse(window.localStorage.getItem("cards"));
-    console.log(cards);
+    
+}
+if (window.localStorage.getItem("cardIdCounter") == null) {
+    window.localStorage.setItem("cardIdCounter", 3);
+    cardIdCounter=window.localStorage.getItem("cardIdCounter")
+    
+}
+if (window.localStorage.getItem("cardIdCounter") !== null) {
+    cardIdCounter=window.localStorage.getItem("cardIdCounter")
+    
 }
 
 function editLocalStorage() {
     window.localStorage.removeItem("cards");
     window.localStorage.setItem("cards", JSON.stringify(cards));
     cards = JSON.parse(window.localStorage.getItem("cards"));
-    console.log(cards);
+    
 }
 editLocalStorage();
 
@@ -50,7 +56,7 @@ function editLocalStorageBooks() {
     window.localStorage.removeItem("books");
     window.localStorage.setItem("books", JSON.stringify(books));
     books = JSON.parse(window.localStorage.getItem("books"));
-    console.log(books);
+    
 }
 
 var tbody = document.querySelector("tbody");
@@ -99,12 +105,28 @@ function sort() {
         
         case "Borrow Date": sortedRows = Array.from(table.rows)
         .slice(1)
-        .sort((rowA, rowB) => rowA.cells[3].innerHTML > rowB.cells[3].innerHTML ? 1 : -1);
+            .sort((rowA, rowB) => {
+                var aComps = rowA.cells[3].innerHTML.split(".");
+                
+                var bComps = rowB.cells[3].innerHTML.split(".");
+                var aDate = new Date(aComps[2], aComps[1], aComps[0]);
+                var bDate = new Date(bComps[2], bComps[1], bComps[0]);
+                return aDate.getTime() - bDate.getTime();
+                
+            });
             break;
         
         case "Return Date": sortedRows = Array.from(table.rows)
         .slice(1)
-        .sort((rowA, rowB) => rowA.cells[4].innerHTML > rowB.cells[4].innerHTML ? 1 : -1);
+        .sort((rowA, rowB) => {
+                var aComps = rowA.cells[4].innerHTML.split(".");
+                
+                var bComps = rowB.cells[4].innerHTML.split(".");
+                var aDate = new Date(aComps[2], aComps[1], aComps[0]);
+                var bDate = new Date(bComps[2], bComps[1], bComps[0]);
+                return aDate.getTime() - bDate.getTime();
+                
+            });;
             break;
     }
 
@@ -143,7 +165,7 @@ function backSearch() {
     }
 }
 
-//modal window
+//modal1 window
 
        
 (function () {
@@ -157,40 +179,40 @@ function backSearch() {
     window.CustomEvent = CustomEvent;
 })();
 
-$modal = function (options) {
+$modal1 = function (options) {
     var
-        _elemModal,
-        _eventShowModal,
-        _eventHideModal,
+        _elemmodal1,
+        _eventShowmodal1,
+        _eventHidemodal1,
         _hiding = false,
         _destroyed = false,
         _animationSpeed = 200;
 
-    function _createModal(options) {
+    function _createmodal1(options) {
         var
-            elemModal = document.createElement('div'),
-            modalTemplate = '<div class="modal__backdrop" data-dismiss="modal"><div class="modal__content"><div class="modal__header"><div class="modal__title" data-modal="title">{{title}}</div><span class="modal__btn-close" data-dismiss="modal" title="Close">×</span></div><div class="modal__body" data-modal="content">{{content}}</div>{{footer}}</div></div>',
-            modalFooterTemplate = '<div class="modal__footer">{{buttons}}</div>',
-            //modalButtonTemplate = '<button type="button" class="{{button_class}}" data-handler={{button_handler}}>{{button_text}}</button>',
-            modalHTML,
-            modalFooterHTML = '';
+            elemmodal1 = document.createElement('div'),
+            modal1Template = '<div class="modal1__backdrop" data-dismiss="modal1"><div class="modal1__content"><div class="modal1__header"><div class="modal1__title" data-modal1="title">{{title}}</div><span class="modal1__btn-close" data-dismiss="modal1" title="Close">×</span></div><div class="modal1__body" data-modal1="content">{{content}}</div>{{footer}}</div></div>',
+            modal1FooterTemplate = '<div class="modal1__footer">{{buttons}}</div>',
+            //modal1ButtonTemplate = '<button type="button" class="{{button_class}}" data-handler={{button_handler}}>{{button_text}}</button>',
+            modal1HTML,
+            modal1FooterHTML = '';
 
-        elemModal.classList.add('modal');
-        modalHTML = modalTemplate.replace('{{title}}', "New card");
-        modalHTML = modalHTML.replace('{{content}}', '<form id="selectVisitor"><label for="visitorList">Visitor:</label><select name="visitorList" id="visitorList" size="5"></select></form><form id="selectBook"><label for="bookList">Book:</label><select name="bookList" id="bookList" size="5"></select></form>');
+        elemmodal1.classList.add('modal11');
+        modal1HTML = modal1Template.replace('{{title}}', "New card");
+        modal1HTML = modal1HTML.replace('{{content}}', '<form id="selectVisitor"><label for="visitorList">Visitor:</label><select name="visitorList" id="visitorList" size="5"></select></form><form id="selectBook"><label for="bookList">Book:</label><select name="bookList" id="bookList" size="5"></select></form>');
      
-        modalFooterHTML = modalFooterTemplate.replace('{{buttons}}', '<button data-dismiss="modal" onclick="saveCard()">Save</button>');
+        modal1FooterHTML = modal1FooterTemplate.replace('{{buttons}}', '<button data-dismiss="modal1" onclick="saveCard()">Save</button>');
         
-        modalHTML = modalHTML.replace('{{footer}}', modalFooterHTML);
-        elemModal.innerHTML = modalHTML;
-        document.body.appendChild(elemModal);
-        return elemModal;
+        modal1HTML = modal1HTML.replace('{{footer}}', modal1FooterHTML);
+        elemmodal1.innerHTML = modal1HTML;
+        document.body.appendChild(elemmodal1);
+        return elemmodal1;
     }
 
-    function _showModal() {
+    function _showmodal1() {
         if (!_destroyed && !_hiding) {
-            _elemModal.classList.add('modal__show');
-            document.dispatchEvent(_eventShowModal);
+            _elemmodal1.classList.add('modal1__show');
+            document.dispatchEvent(_eventShowmodal1);
         }
 
         var selectVisitor = document.getElementById("selectVisitor");
@@ -217,43 +239,43 @@ $modal = function (options) {
         }
     }
 
-    function _hideModal() {
+    function _hidemodal1() {
         _hiding = true;
-        _elemModal.classList.remove('modal__show');
-        _elemModal.classList.add('modal__hiding');
+        _elemmodal1.classList.remove('modal1__show');
+        _elemmodal1.classList.add('modal1__hiding');
         setTimeout(function () {
-            _elemModal.classList.remove('modal__hiding');
+            _elemmodal1.classList.remove('modal1__hiding');
             _hiding = false;
         }, _animationSpeed);
-        document.dispatchEvent(_eventHideModal);
+        document.dispatchEvent(_eventHidemodal1);
     }
 
-    function _handlerCloseModal(e) {
-        if (e.target.dataset.dismiss === 'modal') {
-            _hideModal();
+    function _handlerClosemodal1(e) {
+        if (e.target.dataset.dismiss === 'modal1') {
+            _hidemodal1();
         }
     }
 
-    _elemModal = _createModal(options || {});
+    _elemmodal1 = _createmodal1(options || {});
 
 
-    _elemModal.addEventListener('click', _handlerCloseModal);
-    _eventShowModal = new CustomEvent('show.modal', { detail: _elemModal });
-    _eventHideModal = new CustomEvent('hide.modal', { detail: _elemModal });
+    _elemmodal1.addEventListener('click', _handlerClosemodal1);
+    _eventShowmodal1 = new CustomEvent('show.modal1', { detail: _elemmodal1 });
+    _eventHidemodal1 = new CustomEvent('hide.modal1', { detail: _elemmodal1 });
 
     return {
-        show: _showModal,
-        hide: _hideModal,
+        show: _showmodal1,
+        hide: _hidemodal1,
         destroy: function () {
-            _elemModal.parentElement.removeChild(_elemModal),
-                _elemModal.removeEventListener('click', _handlerCloseModal),
+            _elemmodal1.parentElement.removeChild(_elemmodal1),
+                _elemmodal1.removeEventListener('click', _handlerClosemodal1),
                 _destroyed = true;
         },
         setContent: function (html) {
-            _elemModal.querySelector('[data-modal="content"]').innerHTML = html;
+            _elemmodal1.querySelector('[data-modal1="content"]').innerHTML = html;
         },
         setTitle: function (text) {
-            _elemModal.querySelector('[data-modal="title"]').innerHTML = text;
+            _elemmodal1.querySelector('[data-modal1="title"]').innerHTML = text;
         }
     }
 };
@@ -280,19 +302,19 @@ function saveCard() {
     for (let i = 0; i < books.length; i++){
         if (books[i].bookName == selBook) {
             books[i].copyOfBook--;
-            console.log(books[i]);
+            
         }
     }
     
     editLocalStorageBooks();
-
-   
-    var counter = makeCounter();
-   
-    let c = counter();
-    console.log(c);
+    
     var newCard = new Card();
-    newCard.cardId = c;
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].cardId < bookIdCounter) {
+            newCard.cardId = cardIdCounter;
+            return window.localStorage.setItem("bookIdCounter", (Number(bookIdCounter) + 1));
+        }
+    }
     newCard.visitorName = selVis;
     newCard.bookName = selBook;
     newCard.borrowDate = formatDate(new Date);
@@ -306,11 +328,7 @@ function saveCard() {
     return cardIdCounter;
 }
 
-function makeCounter() {
-        return function() {
-            return cardIdCounter++;
-        };
-}
+
     
 
 function formatDate(date) {
@@ -324,7 +342,7 @@ function formatDate(date) {
     if (day.length < 2) 
         day = '0' + day;
 
-    return [day, month, year].join('.');
+    return [year, month, day].join('.');
 }
 function returnBook(btn) {
     var tr = btn.parentNode.parentNode;
@@ -334,7 +352,7 @@ function returnBook(btn) {
     for (let i = 0; i < books.length; i++){
         if (books[i].bookName == bookNameTable) {
             books[i].copyOfBook++;
-            console.log(books[i]);
+            
         }
     }
     editLocalStorageBooks();
@@ -342,7 +360,7 @@ function returnBook(btn) {
     for (let i = 0; i < cards.length; i++){
         if (cards[i].cardId == cardIdTable) {
             cards[i].returnDate=formatDate(new Date);
-            console.log(cards[i]);
+            
         }
     }
     editLocalStorage();

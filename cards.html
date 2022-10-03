@@ -7,7 +7,7 @@
     <!--Получение стилевых файлов -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cardModalWindow.css">
+    <link rel="stylesheet" href="css/cardmodalWindow.css">
 	</head>
 	<body>
     <header class="header">
@@ -30,7 +30,7 @@
         <div class="container">
           
 <!--заготовка для модального вікна--> 
-          <button id="show-modal" class="btn">New Card</button>
+          <button id="show-modal1" class="btn">New Card</button>
           
 <!-- пошук по списку-->
           <input type="search" name="search" id="search" placeholder="Search">
@@ -64,11 +64,11 @@
     <script>
       (function () {
           // создаём модальное окно
-          var modal = $modal();
-          // при клике по кнопке #show-modal
-          document.querySelector('#show-modal').addEventListener('click', function () {
+          var modal1 = $modal1();
+          // при клике по кнопке #show-modal1
+          document.querySelector('#show-modal1').addEventListener('click', function () {
             // отобразим модальное окно
-            modal.show();
+            modal1.show();
           });
         })();
     </script>
