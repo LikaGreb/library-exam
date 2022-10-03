@@ -70,7 +70,7 @@ editLocalStorage();
 //відображення таблиці відвідувачів
 var tbody = document.querySelector("tbody");
 function setTable(arr) {
-    tbody.innerHTML = "";
+    
     for (let i = 0; i < arr.length; i++) {
         tbody.innerHTML += "<tr><td>" + arr[i].visitorId + "</td><td>" + arr[i].visitorName + "</td><td>" + arr[i].phoneNumber + "</td><td><button class='editBtn' onclick='editButton(this)'>Edit</button></td></tr>";
     }
