@@ -23,6 +23,7 @@ card2.returnDate = formatDate('09 22 2022');
 //масив карток
 var cardsStart = [card1, card2];
 var cards;
+var newCard;
 var cardIdCounter;
 if (window.localStorage.getItem("cards") == null) {
     window.localStorage.setItem("cards", JSON.stringify(cardsStart));
@@ -30,7 +31,6 @@ if (window.localStorage.getItem("cards") == null) {
     
 }
 if (window.localStorage.getItem("cards") !== null) {
-  
     cards = JSON.parse(window.localStorage.getItem("cards"));
     
 }
@@ -109,8 +109,8 @@ function sort() {
                 var aComps = rowA.cells[3].innerHTML.split(".");
                 
                 var bComps = rowB.cells[3].innerHTML.split(".");
-                var aDate = new Date(aComps[2], aComps[1], aComps[0]);
-                var bDate = new Date(bComps[2], bComps[1], bComps[0]);
+                var aDate = new Date(aComps[0], aComps[1], aComps[2]);
+                var bDate = new Date(bComps[0], bComps[1], bComps[2]);
                 return aDate.getTime() - bDate.getTime();
                 
             });
@@ -122,8 +122,8 @@ function sort() {
                 var aComps = rowA.cells[4].innerHTML.split(".");
                 
                 var bComps = rowB.cells[4].innerHTML.split(".");
-                var aDate = new Date(aComps[2], aComps[1], aComps[0]);
-                var bDate = new Date(bComps[2], bComps[1], bComps[0]);
+                var aDate = new Date(aComps[0], aComps[1], aComps[2]);
+                var bDate = new Date(bComps[0], bComps[1], bComps[2]);
                 return aDate.getTime() - bDate.getTime();
                 
             });;
@@ -280,27 +280,35 @@ $modal1 = function (options) {
     }
 };
 
+    
+   
 function saveCard() {
     var selVis;
     var selBook;
     var selectVisitor = document.getElementById("selectVisitor");
+    
+    var selectBook = document.getElementById("selectBook");
     var visitorSelect = selectVisitor.visitorList;
+     var bookSelect = selectBook.bookList;
     for (let i = 0; i < visitorSelect.options.length; i++){
         if (visitorSelect.options[i].selected == true) {
-            selVis=visitorSelect.options[i].value;
+            console.log(1);
+            selVis = visitorSelect.options[i].value;
+            console.log(selVis);
            
         }
     }
-    var selectBook = document.getElementById("selectBook");
-    var bookSelect = selectBook.bookList;
+    
     for (let i = 0; i < bookSelect.options.length; i++){
         if (bookSelect.options[i].selected == true) {
+            console.log(2);
             selBook=bookSelect.options[i].value;
-           
+           console.log(selBook);
         }
     }
     for (let i = 0; i < books.length; i++){
         if (books[i].bookName == selBook) {
+            console.log(3);
             books[i].copyOfBook--;
             
         }
@@ -308,18 +316,19 @@ function saveCard() {
     
     editLocalStorageBooks();
     
-    var newCard = new Card();
+    newCard = new Card();
     for (let i = 0; i < cards.length; i++) {
-        if (cards[i].cardId < bookIdCounter) {
+        if (cards[i].cardId < cardIdCounter) {
+            console.log(cards[i].cardId);
             newCard.cardId = cardIdCounter;
-            return window.localStorage.setItem("bookIdCounter", (Number(bookIdCounter) + 1));
+            window.localStorage.setItem("cardIdCounter", (Number(cardIdCounter) + 1));
         }
     }
     newCard.visitorName = selVis;
     newCard.bookName = selBook;
     newCard.borrowDate = formatDate(new Date);
     newCard.returnDate = "";
-   
+    console.log(newCard);
 
     cards.push(newCard);
     tbody.innerHTML = "";
