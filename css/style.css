@@ -119,6 +119,7 @@ table{
   border-spacing: 0;
   border: 1px solid #9fc8ec;  
   font-weight: 600;  
+  background-color: rgba(243, 242, 242, 0.6);
 }
 td{
   border: 1px solid #9fc8ec;
