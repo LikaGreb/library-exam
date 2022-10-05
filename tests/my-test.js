@@ -1,3 +1,25 @@
+module.exports = class Book{
+    constructor(bookId, bookName, author, pageQuant, publisher, publishYear, copyOfBook) {
+        this.bookId = bookId,
+        this.bookName = bookName,
+        this.author = author,
+        this.pageQuant = pageQuant,
+        this.publisher = publisher,
+        this.publishYear=publishYear,
+        this.copyOfBook = copyOfBook
+    }
+    setBook() {
+        let book = {
+            bookId: this.bookId,
+            bookName : this.bookName,
+            author : this.author,
+            pageQuant : this.pageQuant,
+            publisher: this.publisher,
+            publishYear:this.publishYear,
+            copyOfBook : this.copyOfBook
+        }
+    }
+}
 class Book{
     constructor(bookId, bookName, author, pageQuant, publisher, publishYear, copyOfBook) {
         this.bookId = bookId,
@@ -93,6 +115,7 @@ function setTable(arr) {
     }
 }
 setTable(books);
+module.exports = setTable(arr);
 
     var editBtn = document.getElementsByClassName("editBtn");
     var editBookName = document.getElementById("editBookName");
@@ -120,14 +143,14 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // Коли користувач натискає кнопку, відкривається модальне вікно
- function openModal() {
+module.exports= function openModal() {
     modal.style.display = "block";
 }
 
 // Коли користувач клацає на <span> (x), закривається модальне вікно
-span.onclick = function closeM() {
+/*span.onclick = function closeM() {
     modal.style.display = "none";
-}
+}*/
 
 // Коли користувач клацає будь-де за межами модального вікна, воно закривається
 window.onclick = function(event) {

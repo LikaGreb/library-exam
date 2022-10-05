@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+"jest":"29.0.1"
+  },
+  "name": "library-exam",
+  "version": "1.0.0",
+  "description": "library-exam",
+  "main": "index.js",
+  "scripts": {
+    
+    "test":"jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/LikaGreb/library-exam.git"
+  },
+  "keywords": [
+    "library"
+  ],
+  "author": "LikaGreb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LikaGreb/library-exam/issues"
+  },
+  "homepage": "https://github.com/LikaGreb/library-exam#readme"
+}
