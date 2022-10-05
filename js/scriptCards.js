@@ -106,11 +106,11 @@ function sort() {
         case "Borrow Date": sortedRows = Array.from(table.rows)
         .slice(1)
             .sort((rowA, rowB) => {
-                var aComps = rowA.cells[3].innerHTML.split(".");
+                let aComps = rowA.cells[3].innerHTML.split(".");
                 
-                var bComps = rowB.cells[3].innerHTML.split(".");
-                var aDate = new Date(aComps[0], aComps[1], aComps[2]);
-                var bDate = new Date(bComps[0], bComps[1], bComps[2]);
+                let bComps = rowB.cells[3].innerHTML.split(".");
+                let aDate = new Date(aComps[0], aComps[1], aComps[2]);
+                let bDate = new Date(bComps[0], bComps[1], bComps[2]);
                 return aDate.getTime() - bDate.getTime();
                 
             });
@@ -118,16 +118,27 @@ function sort() {
         
         case "Return Date": sortedRows = Array.from(table.rows)
         .slice(1)
-        .sort((rowA, rowB) => {
-                var aComps = rowA.cells[4].innerHTML.split(".");
+            .sort((rowA, rowB) => {
+                let aComps = rowA.cells[4].innerHTML.split(".");
                 
-                var bComps = rowB.cells[4].innerHTML.split(".");
-                var aDate = new Date(aComps[0], aComps[1], aComps[2]);
-                var bDate = new Date(bComps[0], bComps[1], bComps[2]);
+                let bComps = rowB.cells[4].innerHTML.split(".");
+                var aDate;
+                if (aComps == '<button onclick="returnBook(this)">Return</button>') {
+                    aDate = new Date('1970', '01','01');
+                }
+                else aDate = new Date(aComps[0], aComps[1], aComps[2]);
+                var bDate;
+                if (bComps == '<button onclick="returnBook(this)">Return</button>') {
+                    bDate = new Date('1970', '01','01');
+                }    
+                 else bDate  = new Date(bComps[0], bComps[1], bComps[2]);
+                console.log(aComps,bComps);
                 return aDate.getTime() - bDate.getTime();
                 
-            });;
+            });
             break;
+        
+       
     }
 
     table.tBodies[0].append(...sortedRows);
