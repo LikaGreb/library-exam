@@ -1,0 +1,24 @@
+#anotation,
+#devs{
+    font-size: 16px;
+    margin: 25px;
+    padding: 15px;
+}
+#anotation>ol{
+   list-style-type: decimal;
+}   
+.anot_ul {
+    list-style:outside;
+    margin-left: 20px;
+}
+.anot_ul>li,
+#anot_ol>li{
+    margin: 15px 0 10px 0;
+}
+.annot_text{
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+.hidden_anot{
+display:none;
+}
