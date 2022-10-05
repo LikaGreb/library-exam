@@ -5,12 +5,26 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
+  height: 100%;  
+}
+.wraper{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../img/books.jpg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+.main{
+  flex: 1 1 auto;      
 }
 
 .container {
   max-width: 970px;
   padding: 0 15px;
-  margin: 0 auto;
+  margin: 0 auto;  
 }
 
 p {
@@ -20,11 +34,15 @@ p {
 
 .header {
   padding: 20px 0;
+  background-color: rgb(4, 15, 73);
+  margin-bottom: 20px;    
+  box-shadow: 0px 1px 3px rgb(4, 15, 73);
+  text-shadow: 0px 1px 3px rgb(57, 79, 192);
 }
 .header__container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;  
 }
 .logo {
   font-size: 25px;
@@ -41,7 +59,7 @@ p {
 }
 .header__nav a{
   font-style: italic;
-  color: #676770;
+  color: white;
   transition: color 0.2s;
 }
 .header__nav a:hover{
@@ -94,4 +112,71 @@ p {
 
 th{
   display: none;
+}
+table{
+  width: 100%;
+  margin: 10px auto;
+  border-spacing: 0;
+  border: 1px solid #9fc8ec;  
+  font-weight: 600;  
+}
+td{
+  border: 1px solid #9fc8ec;
+  padding: 5px;
+}
+
+button{
+  border: 1px solid white;
+  color: white;
+  background-color: #0059a7;
+  width: 100px;
+  padding: 5px;
+  border-radius: 7%;
+  font-weight: 600;  
+}
+
+input{
+  border: 1px solid #0059a7;  
+  padding: 5px;  
+  border-radius: 7%;
+}
+
+select{
+  border: 1px solid #0059a7;  
+  padding: 5px;
+  border-radius: 7%;
+}
+
+label{
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.sortLabel{
+  margin-left: 5%;
+}
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+.content{
+  width: 100%;
+}
+
+footer .content{
+  background-color: rgb(4, 15, 73);
+  text-align: center;
+  padding: 10px;
+  color: white;
+  box-shadow: 0px 1px 3px rgb(4, 15, 73);
+  text-shadow: 0px 1px 3px rgb(57, 79, 192);
+}
+.footerButtons button{
+  background: #0059a7;
+  color: white;
+  padding: 5px;
+  font-size: 10px;
+  border: 1px solid white;
+  border-radius: 3px;
 }
