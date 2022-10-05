@@ -125,7 +125,7 @@ var span = document.getElementsByClassName("close")[0];
 }
 
 // Коли користувач клацає на <span> (x), закривається модальне вікно
-span.onclick = function() {
+span.onclick = function closeM() {
     modal.style.display = "none";
 }
 
@@ -278,3 +278,4 @@ function backSearch() {
        
     }
 }
+// test
